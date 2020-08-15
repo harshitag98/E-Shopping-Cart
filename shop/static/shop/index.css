@@ -8,8 +8,9 @@
 }
 
 .col-md-3 img{
-    width:100%;
-    height:auto;
+    width: 90%;
+    height: 200px;
+    margin: auto;
 }
 
 body .carousel-indicators{
@@ -20,6 +21,12 @@ body .carousel-indicators{
 body .carousel-control-prev-icon,
 body .carousel-control-next-icon{
     background-color:gray;
+}
+
+body .carousel-control-prev,
+body .carousel-control-next{
+    top: auto;
+    bottom: auto;
 }
 
 body .no-padding{
