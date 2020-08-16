@@ -1,5 +1,57 @@
 {% extends 'shop/basic.html' %}
 
-{% block title %} Product View - E-Shopping Cart{% endblock %}
+{% block title %} {{product.product_name}} - E-Shopping Cart{% endblock %}
 
-{% block body %} <h1>Product View body</h1> {% endblock %}
+{% block body %}
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row mb-4">
+                <img src="/media/{{product.image}}" width="300px" height="300px">
+            </div>
+            <div class="row ml-3">
+                <button class="btn btn-primary ml-2">Buy Now</button>
+                <button class="btn btn-primary ml-3">Add To Cart</button>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row mb-2">
+                <h2>{{product.product_name}}</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Category - </h6> {{product.category}}
+                </div>
+                <div class="col-md-4">
+                    <h6>Sub-Category - </h6> {{product.subcategory}}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <p class="my-2">
+                    <b><span style="font-size:large;">Price : </span></b>
+                    <span style="color:red;">{{product.price}}</span>
+                    <b>Free Delivery</b>
+                </p>
+            </div>
+            <hr>
+            <div class="row mt-5 mb-4">
+                <ul>
+                    {% for i in product.overview_as_list %}
+                    <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr>
+            <div class="row">
+                <h4 class="my-4">Product Description</h4>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
