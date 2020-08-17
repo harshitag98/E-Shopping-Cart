@@ -34,7 +34,7 @@
                     <div class="card" style="width: 18rem;">
                         <img src='/media/{{i.image}}' class="card-img-top mt-3 mr-3" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{i.product_name}}</h5>
+                            <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
                             <p class="card-text">{{i.description|slice:":50"}}.....</p>
                             <span id="spanpr{{i.id}}" class="spanpr">
                                 <button id="pr{{i.id}}" class="btn btn-primary cartButton mr-2">Add to Cart</button>
