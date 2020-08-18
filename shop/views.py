@@ -8,6 +8,7 @@ from math import ceil
 def index(request):
     categories_products = Product.objects.values('category')
     categories = {item['category'] for item in categories_products}
+    categories = sorted(list(categories))
     all_products = []
     for cat in categories:
         product = Product.objects.filter(category=cat)
