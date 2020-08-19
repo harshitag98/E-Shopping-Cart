@@ -1,0 +1,14 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} Order Confirm - E-Shopping Cart{% endblock %}
+
+{% block body %}
+
+<h1>Thank</h1>
+
+<p>{{products}} items will be shipped to {{name}}, {{address}}, {{city}}, {{state}}, {{zip}}</p>
+
+<script>
+    localStorage.clear()    
+</script>
+{% endblock %}

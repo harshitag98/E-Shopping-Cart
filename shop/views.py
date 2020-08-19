@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product, Contact, Order
 from math import ceil
+import uuid, json
 
 
 # Create your views here.
@@ -43,7 +44,7 @@ def productView(request, myid):
 
 def checkout(request):
     if request.method=="POST":
-        items_json = request.POST.get('itemsJson', '')
+        order_products = request.POST.get('itemsJson', '')
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
         address = request.POST.get('address1', '') + " " + request.POST.get('address2', '')
@@ -51,10 +52,15 @@ def checkout(request):
         state = request.POST.get('state', '')
         zip_code = request.POST.get('zip_code', '')
         phone = request.POST.get('phone', '')
-        order = Order(items_json=items_json, name=name, email=email, address=address, city=city,
-                       state=state, zip_code=zip_code, phone=phone)
+
+        random = str(uuid.uuid4()).upper()
+        random = random.replace("-","")
+        orderID = random[0:15]
+
+        order = Order(orderID=orderID, order_products=order_products, name=name, email=email, address=address, city=city, state=state, zip_code=zip_code, phone=phone)
         order.save()
-        thank = 1
-        id = order.order_id
-        return render(request, 'shop/checkout.html', {'thank':thank, 'id': id})
+
+        products = json.loads(order_products)
+        params = {'products':len(products), 'name':name, 'address':address, 'city':city, 'state':state, 'zip':zip_code, 'order_id':orderID}
+        return render(request, 'shop/orderConfirm.html', params)
     return render(request, 'shop/checkout.html')

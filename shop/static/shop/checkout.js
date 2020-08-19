@@ -24,11 +24,8 @@ if ($.isEmptyObject(cart)) {
 }
 document.getElementById('cart_no').innerHTML = sum;
 
-$('#itemsJson').val(JSON.stringify(cart));
-
-if(thank == 1){
-    var str = "Thanks for ordering with us. Your order id is " + id + ". Use it to track your order using our order tracker";
-    alert(str);
-    localStorage.clear();
-    document.location = "/shop";
+var order_products = {};
+for(item in cart){
+    order_products[cart[item][0]] = cart[item][1];
 }
+$('#itemsJson').val(JSON.stringify(order_products));

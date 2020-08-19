@@ -31,7 +31,8 @@ class Contact(models.Model):
 
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
-    items_json = models.CharField(max_length=5000)
+    orderID = models.CharField(max_length=5000, default="")
+    order_products = models.CharField(max_length=5000, default="")
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
@@ -41,4 +42,4 @@ class Order(models.Model):
     phone = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name
+        return self.orderID
