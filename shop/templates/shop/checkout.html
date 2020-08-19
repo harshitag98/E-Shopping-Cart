@@ -2,4 +2,77 @@
 
 {% block title %} Checkout - E-Shopping Cart{% endblock %}
 
-{% block body %} <h1>Checkout body</h1> {% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="col my-4">
+        <h3 class="mb-4">Step 1 - Review Your Cart Items</h3>
+        <div>
+            <ul class="list-group col-md-7" id="items">
+            </ul>
+        </div>
+    </div>
+
+    <hr style="border: 1px dashed gray; width: 70%; margin: 0; margin-top: 4%;">
+
+    <div class="col mt-4">
+        <h3 class="mb-4">Step 2 - Enter Address & Other Details:</h3>
+        <form method="post" action="/shop/checkout/">{% csrf_token %}
+            <input type="hidden" name="itemsJson" id="itemsJson">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="inputname">Full Name</label>
+                    <input type="name" class="form-control" id="inputname" name="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputemail">Email</label>
+                    <input type="email" class="form-control" id="inputemaile" name="email" placeholder="Enter your email">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputPhone">Phone Number</label>
+                    <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="Enter phone no.">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-7">
+                    <label for="inputAddress">Address Line 1</label>
+                    <input type="text" class="form-control" id="inputAddress1" name="address1" placeholder="House no. / Flat no. / Apartment no.">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-7">
+                    <label for="inputAddress2">Address Line 2</label>
+                    <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Street address">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity" name="city" placeholder="Enter city">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputState">State</label>
+                    <input type="text" class="form-control" id="inputState" name="state" placeholder="Enter state">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" name="zip_code" id="inputZip">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Place Order</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %} 
+<script>
+    var thank = {{thank}};
+    var id = {{id}};
+</script>
+{% load static %}
+<script src="{% static 'shop/checkout.js' %}"></script>
+{% endblock %}
