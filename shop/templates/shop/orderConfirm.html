@@ -4,11 +4,20 @@
 
 {% block body %}
 
-<h1>Thank</h1>
-
-<p>{{products}} items will be shipped to {{name}}, {{address}}, {{city}}, {{state}}, {{zip}}</p>
+<div class="container" style="text-align: center;">
+    <h3 class="my-4">Thank you for shopping with us</h3>
+    <hr width="60%">
+    <p>Your order has been placed successfully and your order ID is <b>{{order_id}}</b> </p>
+    <p class="mb-4">Use this order ID ({{order_id}}) to track your status or to check the status of your order.</p>
+    <hr width="85%">
+    <p><b>{{products}} items will be shipped to {{name}},</b> {{address}}, {{city}}, {{state}}, {{zip}}</p>
+    <p>Your items will be delivered within next 7 days.</p>
+    <hr width="45%">
+    <a href="/shop"><button id="button" class="btn btn-primary" style="width: 250px;">Continue Shopping</button></a>
+</div>
 
 <script>
     localStorage.clear()    
 </script>
+
 {% endblock %}
