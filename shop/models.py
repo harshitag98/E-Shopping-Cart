@@ -29,6 +29,7 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     orderID = models.CharField(max_length=5000, default="")
@@ -43,3 +44,16 @@ class Order(models.Model):
 
     def __str__(self):
         return self.orderID
+
+    
+class OrderTracker(models.Model):
+    tracker_id  = models.AutoField(primary_key=True)
+    order_id = models.CharField(max_length=20)
+    update_description = models.CharField(max_length=500)
+    timestamp = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.order_id
+        
+
+#username for admin user is harshit and password is django123

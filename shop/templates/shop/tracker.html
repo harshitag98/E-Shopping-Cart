@@ -1,5 +1,37 @@
 {% extends 'shop/basic.html' %}
+{% block title%} Order Tracker - E-Shopping Cart{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="col my-4">
+        <h3 class="mb-4">Enter your Order Id and Email address to track your order</h3>
+        <form method="post" action="#" id="trackerForm">{% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="orderId">Order Id</label>
+                    <input type="text" class="form-control" id="order_id" name="order_id" placeholder="Order Id">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email address">
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <button type="submit" class="btn btn-primary">Track Order</button>
+            </div>
+    </div>
+    <hr>
+    <div class="col my-4">
+        <h3>Your Order Status</h3>
+        <div class="my-4">
+            <ul class="list-group" id="items">
+            	Enter your order Id and Email address and click on Track Order to find details about your order!
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-{% block title %} Tracker - E-Shopping Cart{% endblock %}
-
-{% block body %} <h1>Tracker body</h1> {% endblock %}
+{% block js %} 
+{% load static %}
+<script src="{% static 'shop/tracker.js' %}"></script>
+{% endblock %}

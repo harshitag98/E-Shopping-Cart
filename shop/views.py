@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Product, Contact, Order
+from .models import Product, Contact, Order, OrderTracker
 from math import ceil
 import uuid, json
 
@@ -18,9 +18,11 @@ def index(request):
         all_products.append([product, range(1,nSlides+1), nSlides])
     params = {'all_products': all_products}
     return render(request, "shop/index.html", params)
+ 
 
 def about(request):
     return render(request, "shop/about.html")
+
 
 def contact(request):
     if(request.method == 'POST'):
@@ -32,15 +34,36 @@ def contact(request):
         contact.save()
     return render(request, "shop/contact.html")
 
+
 def tracker(request):
+    if request.method=="POST":
+        order_id = request.POST.get('order_id', '')
+        email = request.POST.get('email', '')
+        try:
+            order = Order.objects.filter(orderID=order_id, email=email)
+            if len(order)>0:
+                track = OrderTracker.objects.filter(order_id=order_id)
+                updates = []
+                for item in track:
+                    updates.append({'description':item.update_description, 'time':item.timestamp})
+                response = json.dumps(updates, default=str)
+                return HttpResponse(response)
+            else:
+                return HttpResponse('{}')
+        except Exception as e:
+            return HttpResponse('{}')
+
     return render(request, "shop/tracker.html")
+
 
 def search(request):
     return render(request, "shop/search.html")
 
+
 def productView(request, myid):
     product = Product.objects.filter(id=myid)
     return render(request, "shop/prodView.html", {'product':product[0]})
+
 
 def checkout(request):
     if request.method=="POST":
@@ -59,6 +82,9 @@ def checkout(request):
 
         order = Order(orderID=orderID, order_products=order_products, name=name, email=email, address=address, city=city, state=state, zip_code=zip_code, phone=phone)
         order.save()
+
+        track = OrderTracker(order_id=order.orderID, update_description="The order has been placed")
+        track.save()
 
         products = json.loads(order_products)
         params = {'products':len(products), 'name':name, 'address':address, 'city':city, 'state':state, 'zip':zip_code, 'order_id':orderID}
