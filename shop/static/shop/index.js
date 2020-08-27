@@ -2,25 +2,24 @@ var cart;
 
 if (localStorage.getItem('cart') == null) {
     cart = {};
-}
-else {
+} else {
     cart = JSON.parse(localStorage.getItem('cart'));
 }
 displayCartValue();
 
-document.getElementById("popcart").addEventListener('click', function(){
+document.getElementById("popcart").addEventListener('click', function () {
     // $('#popcart').popover();
     updatePopover();
     $('#popcart').popover('show');
 });
+
 function updatePopover() {
     var cart_str = "<div class='mx-2 my-2'>";
     var i = 1;
     var s = "";
-    if(Object.keys(cart).length == 0){
+    if (Object.keys(cart).length == 0) {
         s = `<p>Oops! Your cart is empty</p></div>`;
-    }
-    else{
+    } else {
         for (var item in cart) {
             cart_str = cart_str + "<b>" + i + "</b>. ";
             cart_str = cart_str + document.getElementById('name' + item).innerHTML + "<b>   Qty: </b>" + cart[item][1] + '<br>';
@@ -32,7 +31,7 @@ function updatePopover() {
     document.getElementById('popcart').setAttribute('data-content', cart_str);
 }
 
-function clearCart(){
+function clearCart() {
     for (var item in cart) {
         document.getElementById('span' + item).innerHTML = "<button id='" + item + "' class='btn btn-primary cartButton mr-2'>Add To Cart</button>";
     }
@@ -49,10 +48,16 @@ $('.spanpr').on("click", "button.cartButton", function () {
     var pr_id = this.id;
     if (cart[pr_id] != undefined) {
         cart[pr_id][1] = cart[pr_id][1] + 1;
-    }
-    else {
-        var proName = document.getElementById("name"+pr_id).innerHTML;
-        cart[pr_id] = [proName, 1];
+    } else {
+        var proName = document.getElementById("name" + pr_id).innerHTML;
+        var price = document.getElementById("price" + pr_id).innerHTML;
+        var iPrice = "";
+        for(let i in price){
+            if(price[i] != ','){
+                iPrice = iPrice + price[i];
+            }
+        }
+        cart[pr_id] = [proName, 1, parseInt(iPrice)];
     }
     updateCart(cart, pr_id);
 });
@@ -75,7 +80,7 @@ function updateCart(cart, pr_id) {
 }
 
 $('.spanpr').on("click", "button.minus", function () {
-    var m_id = this.id.slice(5,);
+    var m_id = this.id.slice(5, );
     cart[m_id][1] = cart[m_id][1] - 1;
     if (cart[m_id][1] == 0) {
         document.getElementById('span' + m_id).innerHTML = "<button id='" + m_id + "' class='btn btn-primary cartButton mr-2'>Add to Cart</button>"
@@ -84,8 +89,7 @@ $('.spanpr').on("click", "button.minus", function () {
         displayCartValue();
         updatePopover();
         $('#popcart').popover('hide');
-    }
-    else {
+    } else {
         document.getElementById('val' + m_id).innerHTML = cart[m_id][1];
         localStorage.setItem('cart', JSON.stringify(cart));
         displayCartValue();
@@ -95,7 +99,7 @@ $('.spanpr').on("click", "button.minus", function () {
 });
 
 $('.spanpr').on("click", "button.plus", function () {
-    var m_id = this.id.slice(4,);
+    var m_id = this.id.slice(4, );
     cart[m_id][1] = cart[m_id][1] + 1;
     document.getElementById('val' + m_id).innerHTML = cart[m_id][1];
     localStorage.setItem('cart', JSON.stringify(cart));

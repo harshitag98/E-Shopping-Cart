@@ -21,17 +21,26 @@
     </div>
     <hr>
     <div class="col my-4">
-        <h3>Your Order Status</h3>
-        <div class="my-4">
-            <ul class="list-group" id="items">
-            	Enter your order Id and Email address and click on Track Order to find details about your order!
-            </ul>
+        <p id="track" style="display: none;"></p>
+        <div id="div1" style="display: none;">
+            <h3>Order Details</h3>
+            <div class="col-8 my-4">
+                <ul class="list-group" id="orderItems">
+                </ul>
+            </div>
+        </div>
+        <div id="div2" style="display: none;">
+            <h3>Order Status</h3>
+            <div class="col-8 my-4">
+                <ul class="list-group" id="status">
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
 
-{% block js %} 
+{% block js %}
 {% load static %}
 <script src="{% static 'shop/tracker.js' %}"></script>
 {% endblock %}

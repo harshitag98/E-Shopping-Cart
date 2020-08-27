@@ -46,12 +46,12 @@ def tracker(request):
                 updates = []
                 for item in track:
                     updates.append({'description':item.update_description, 'time':item.timestamp})
-                response = json.dumps(updates, default=str)
+                response = json.dumps([updates, order[0].order_products], default=str)
                 return HttpResponse(response)
             else:
-                return HttpResponse('{}')
+                return HttpResponse('[]')
         except Exception as e:
-            return HttpResponse('{}')
+            return HttpResponse('[]')
 
     return render(request, "shop/tracker.html")
 
