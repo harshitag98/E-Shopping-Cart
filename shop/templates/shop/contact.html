@@ -4,6 +4,15 @@
 
 {% block body %}
 
+{% if flag %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Thank you for contacting us. We will get back to you shortly!!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+
 <div class="container mt-3">
   <h3 class="mb-2 ml-3">Contact Us</h3>
   <h6 class="mb-4 ml-3">Feel free to drop us a line below!</h6>

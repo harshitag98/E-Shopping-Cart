@@ -25,6 +25,7 @@ def about(request):
 
 
 def contact(request):
+    flag = False
     if(request.method == 'POST'):
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
@@ -32,7 +33,8 @@ def contact(request):
         message = request.POST.get('message', '')
         contact = Contact(name=name, email=email, phone=phone, message=message)
         contact.save()
-    return render(request, "shop/contact.html")
+        flag = True
+    return render(request, "shop/contact.html", {'flag': flag})
 
 
 def tracker(request):
