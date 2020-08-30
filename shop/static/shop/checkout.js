@@ -28,6 +28,8 @@ if ($.isEmptyObject(cart)) {
 document.getElementById('cart_no').innerHTML = sum;
 document.getElementById('totalPrice').innerHTML = totalPrice;
 
+$('#amount').val($('#totalPrice').html())
+
 var order_products = {};
 for (item in cart) {
     order_products[cart[item][0]] = cart[item][1];

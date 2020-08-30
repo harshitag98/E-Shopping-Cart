@@ -34,6 +34,7 @@ class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     orderID = models.CharField(max_length=5000, default="")
     order_products = models.CharField(max_length=5000, default="")
+    amount = models.CharField(max_length=100, default="")
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     address = models.CharField(max_length=100)

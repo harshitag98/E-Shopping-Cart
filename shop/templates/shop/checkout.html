@@ -20,6 +20,7 @@
         <h3 class="mb-4">Step 2 - Enter Address & Other Details:</h3>
         <form method="post" action="/shop/checkout/">{% csrf_token %}
             <input type="hidden" name="itemsJson" id="itemsJson">
+            <input type="hidden" name="amount" id="amount">
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputname">Full Name</label>
