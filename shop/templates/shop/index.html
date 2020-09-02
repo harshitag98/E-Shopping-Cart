@@ -32,7 +32,8 @@
                     {% for i in products %}
                     <div class="col-xs-3 col-sm-3 col-md-3">
                         <div class="card" style="width: 18rem;">
-                            <img src='/media/{{i.image}}' class="card-img-top mt-3 mr-3" alt="...">
+                            <a href="/shop/productView/{{i.id}}"><img src='/media/{{i.image}}'
+                                    class="card-img-top mt-3 mr-3" alt="..."></a>
                             <div class="card-body">
                                 <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
                                 <h6 class="card-title">Price: <span id="pricepr{{i.id}}"
